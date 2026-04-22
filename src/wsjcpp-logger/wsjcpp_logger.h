@@ -27,13 +27,13 @@
 #ifndef WSJCPP_LOGGER_H
 #define WSJCPP_LOGGER_H
 
-#define WSJCPP_LOGGER_VER "1.0.0"
+#define WSJCPP_LOGGER_VER "1.0.1"
 #define WSJCPP_LOGGER_VER_MAJOR "1"
 #define WSJCPP_LOGGER_VER_MINOR "0"
-#define WSJCPP_LOGGER_VER_BUILD "0"
+#define WSJCPP_LOGGER_VER_BUILD "1"
 #define WSJCPP_LOGGER_VER_1
 #define WSJCPP_LOGGER_VER_1_0
-#define WSJCPP_LOGGER_VER_1_0_0
+#define WSJCPP_LOGGER_VER_1_0_1
 
 #include <string>
 #include <vector>

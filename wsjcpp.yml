@@ -3,7 +3,7 @@ cmake_cxx_standard: 11
 cmake_minimum_required: 3.5
 
 name: wsjcpp-logger
-version: v1.0.0
+version: v1.0.1
 description: C++ Logger Implementation
 issues: https://github.com/wsjcpp/wsjcpp-logger/issues
 repositories:
@@ -25,3 +25,4 @@ distribution:
   - source-file: src/wsjcpp-logger/wsjcpp_logger.h
     target-file: wsjcpp_logger.h
     type: "source-code" # todo must be header-file
+
