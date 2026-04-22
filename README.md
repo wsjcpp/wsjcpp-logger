@@ -10,8 +10,6 @@
 
 C++ Logger Implementation
 
-*include helper functions, logger and etc.*
-
 ## Integrate to your project
 
 ```
@@ -23,13 +21,13 @@ Or include files:
 * `src/wsjcpp-logger/wsjcpp_logger.h`
 * `src/wsjcpp-logger/wsjcpp_logger.cpp`
 
-## Logger (WsjcppLog)
+## Logger (wsjcpp::Log)
 
 * Output will be colored for console, but color will be missing for files.
 * Functions are safe thread.
 * Logger supports a log rotation (every 51000 seconds / every day)
-* WsjcppLog::throw_err - will be generate `throw std::runtime_error(sMessage);`
-* std::vector<std::string> WsjcppLog::getLastLogMessages() - last 50 records from log
+* wsjcpp::Log::throw_err - will be generate `throw std::runtime_error(sMessage);`
+* std::vector<std::string> wsjcpp::Log::getLastLogMessages() - last 50 records from log
 
 To init logger first and enable.
 
