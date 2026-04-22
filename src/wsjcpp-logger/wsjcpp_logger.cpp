@@ -36,25 +36,13 @@
     #define PATH_MAX 256
 #endif
 
-#include <filesystem>
+// #include <filesystem> // in c++ 17
 #include <sys/stat.h>
-#include <sys/types.h>
 #include <iostream>
 #include <sstream>
 #include <fstream>
-#include <time.h>
-#include <ctime>
-#include <math.h>
-#include <chrono>
-#include <string>
-#include <algorithm>
-#include <cstdlib>
 #include <thread>
-#include <cstdint>
-#include <streambuf>
-// #include <sys/socket.h>
-#include <random>
-#include <iomanip>
+#include <iomanip> // std::setw
 
 namespace wsjcpp {
 
@@ -119,8 +107,8 @@ bool dirExists(const std::string &sDirname) {
 bool makeDir(const std::string &sDirname) {
     struct stat st;
 
-    const std::filesystem::path dir{sDirname};
-    std::filesystem::create_directory(dir);
+    // const std::filesystem::path dir{sDirname};
+    // std::filesystem::create_directory(dir);
 
     int nStatus = mkdir(sDirname.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
     if (nStatus == 0) {

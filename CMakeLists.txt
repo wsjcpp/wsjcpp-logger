@@ -7,7 +7,7 @@ project(wsjcpp-logger)
 #### BEGIN_WSJCPP_APPEND
 #### END_WSJCPP_APPEND
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 11)
 set(EXECUTABLE_OUTPUT_PATH ${wsjcpp-logger_SOURCE_DIR})
 
 # Sources
