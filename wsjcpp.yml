@@ -1,0 +1,40 @@
+wsjcpp_version: v0.0.1
+cmake_cxx_standard: 17
+cmake_minimum_required: 3.0
+
+name: wsjcpp-logger
+version: v1.0.0
+description: C++ Logger Implementation
+issues: https://github.com/wsjcpp/wsjcpp-logger/issues
+repositories:
+  - type: main
+    url: "https://github.com/wsjcpp/wsjcpp-logger"
+keywords:
+  - c++
+  - wsjcpp
+  - logger
+
+authors:
+  - name: Evgenii Sopov
+    email: mrseakg@gmail.com
+
+distribution:
+  - source-file: src/wsjcpp-logger/wsjcpp_logger.cpp
+    target-file: wsjcpp_logger.cpp
+    type: "source-code"
+  - source-file: src/wsjcpp-logger/wsjcpp_logger.h
+    target-file: wsjcpp_logger.h
+    type: "source-code" # todo must be header-file
+  - source-file: "src/wsjcpp_unit_tests.cpp"
+    target-file: "wsjcpp_unit_tests.cpp"
+    type: "unit-tests"
+  - source-file: "src/wsjcpp_unit_tests.h"
+    target-file: "wsjcpp_unit_tests.h"
+    type: "unit-tests"
+  - source-file: "src/wsjcpp_unit_tests_main.cpp"
+    target-file: "wsjcpp_unit_tests_main.cpp"
+    type: "unit-tests"
+
+unit-tests:
+  cases:
+
