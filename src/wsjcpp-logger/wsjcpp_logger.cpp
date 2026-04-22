@@ -22,7 +22,7 @@
  * SOFTWARE.
 */
 
-// original source-code: https://github.com/wsjcpp/wsjcpp-core
+// original source-code: https://github.com/wsjcpp/wsjcpp-logger
 
 #include "wsjcpp_logger.h"
 

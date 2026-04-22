@@ -1,12 +1,12 @@
 # wsjcpp-logger
 
 <p align="center">
-    <a href="https://github.com/wsjcpp/wsjcpp-core/logger" alt="Activity">
+    <a href="https://github.com/wsjcpp/wsjcpp-logger" alt="Activity">
         <img src="https://img.shields.io/github/commit-activity/m/wsjcpp/wsjcpp-logger" />
     </a>
 </p>
 
-[![Github Stars](https://img.shields.io/github/stars/wsjcpp/wsjcpp-logger.svg?label=github%20%E2%98%85)](https://github.com/wsjcpp/wsjcpp-logger/stargazers) [![Github Stars](https://img.shields.io/github/contributors/wsjcpp/wsjcpp-logger.svg)](https://github.com/wsjcpp/wsjcpp-logger/) [![Github Forks](https://img.shields.io/github/forks/wsjcpp/wsjcpp-core.svg?label=github%20forks)](https://github.com/wsjcpp/wsjcpp-logger/network/members)
+[![Github Stars](https://img.shields.io/github/stars/wsjcpp/wsjcpp-logger.svg?label=github%20%E2%98%85)](https://github.com/wsjcpp/wsjcpp-logger/stargazers) [![Github Stars](https://img.shields.io/github/contributors/wsjcpp/wsjcpp-logger.svg)](https://github.com/wsjcpp/wsjcpp-logger/) [![Github Forks](https://img.shields.io/github/forks/wsjcpp/wsjcpp-logger.svg?label=github%20forks)](https://github.com/wsjcpp/wsjcpp-logger/network/members)
 
 C++ Logger Implementation
 
