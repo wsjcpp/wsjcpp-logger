@@ -43,23 +43,31 @@
 
 namespace wsjcpp {
 
-class LogGlobalConf {
-    public:
-        LogGlobalConf();
-        void doLogRotateUpdateFilename(bool bForce = false);
-        std::mutex logMutex;
-        std::string logDir;
-        std::string logPrefixFile;
-        std::string logFile;
-        bool enableLogFile;
-        long logStartTime;
-        long logRotationPeriodInSeconds;
-        std::deque<std::string> logLastMessages;
+class Config {
+public:
+  Config();
+  void doLogRotateUpdateFilename(bool bForce = false);
+  std::mutex logMutex;
+  std::string logDir;
+  std::string logPrefixFile;
+  std::string logFile;
+  bool enableLogFile;
+  long logStartTime;
+  long logRotationPeriodInSeconds;
+  std::deque<std::string> logLastMessages;
+};
+
+class Global {
+public:
+  Global();
+  std::vector<Config *> logs;
+private:
+  int m_logVectorSize;
 };
 
 class Log {
 public:
-  static LogGlobalConf g_WSJCPP_LOG_GLOBAL_CONF;
+  static Global g_GLOBAL;
 
   static void debug(const std::string &sTag, const std::string &sMessage);
   static void info(const std::string &sTag, const std::string &sMessage);
