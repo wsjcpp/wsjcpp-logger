@@ -1,6 +1,6 @@
 # Changelog
 
-## [v2.0.1] - 2026-??-?? (2026 ?? ??)
+## [v2.0.1] - 2026-08-11 (2026 Aug 11)
 
 - Renamed method 'get_log_dirpath' to just 'log_dirpath'
 - Renamed method 'get_log_file_fullpath' to just 'log_file_fullpath'
@@ -9,6 +9,7 @@
 - Removed methods ok, err, warn, throw_err
 - Added new method 'set_log_level_redirect_to_global' and implemented it
 - Removed set_enable_log_file and enable_log_file (can control it via set_log_level_file_output)
+- Fixed filepath log (on start not changed). Reset do_rotation when changed prefix or path or lvl log output
 
 ## [v2.0.0] - 2026-06-16 (2026 June 16)
 
