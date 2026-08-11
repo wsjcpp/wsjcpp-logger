@@ -25,8 +25,6 @@
 // original source-code: https://github.com/sea5kg/sea5kg-logger
 
 #include <string.h>
-// #include <iostream>
-// #include <algorithm>
 #include <memory>
 #include "sea5kg_logger.h"
 
