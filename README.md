@@ -32,7 +32,9 @@ Or include files:
 To init logger first and enable.
 
 ```
-#include <sea5kg_logger.h>
+#include <string.h>
+#include <memory>
+#include "sea5kg_logger.h"
 
 int main(int argc, char* argv[]) {
   const std::string TAG = "MAIN";
@@ -40,7 +42,7 @@ int main(int argc, char* argv[]) {
   sea5kg::log::set_log_level_console_output(sea5kg::log_level::INFO);
   sea5kg::log::set_log_dirpath(".logs/%Y/%m/%d");
   sea5kg::log::set_log_filename_prefix("main_");
-  sea5kg::log::set_enable_log_file(true);
+  sea5kg::log::set_log_level_file_output(sea5kg::log_level::DEBUG);
   sea5kg::log::set_runtime_history_size(50);
   sea5kg::log::debug(TAG, "Hello info");
   sea5kg::log::info(TAG, "Hello info");
@@ -53,7 +55,7 @@ int main(int argc, char* argv[]) {
   another_logger->set_log_dirpath(sea5kg::log::log_dirpath());
   another_logger->set_rotation_period_in_seconds(sea5kg::log::rotation_period_in_seconds());
   another_logger->set_log_filename_prefix("another_");
-  another_logger->set_enable_log_file(true);
+  another_logger->set_log_level_file_output(sea5kg::log_level::DEBUG);
   another_logger->set_log_level_console_output(sea5kg::log_level::DISABLE);
   another_logger->set_log_level_redirect_to_global(sea5kg::log_level::SUCCESS);
   another_logger->debug(TAG2, "Message 0");
