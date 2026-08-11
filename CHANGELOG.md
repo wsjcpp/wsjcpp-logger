@@ -10,6 +10,7 @@
 - Added new method 'set_log_level_redirect_to_global' and implemented it
 - Removed set_enable_log_file and enable_log_file (can control it via set_log_level_file_output)
 - Fixed filepath log (on start not changed). Reset do_rotation when changed prefix or path or lvl log output
+- Applied clang-format
 
 ## [v2.0.0] - 2026-06-16 (2026 June 16)
 

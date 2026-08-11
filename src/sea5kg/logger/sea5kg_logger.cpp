@@ -20,46 +20,51 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/sea5kg/sea5kg-logger
 
 #include "sea5kg_logger.h"
 
 #ifndef _MSC_VER
-    #include <dirent.h>
-    #include <sys/time.h>
-    #include <unistd.h>
-    #include <arpa/inet.h>
+#include <arpa/inet.h>
+#include <dirent.h>
+#include <sys/time.h>
+#include <unistd.h>
 #else
-    #include <direct.h>
-    #define PATH_MAX 256
+#include <direct.h>
+#define PATH_MAX 256
 #endif
 
 // #include <filesystem> // in c++ 17
-#include <sys/stat.h>
-#include <iostream>
-#include <sstream>
-#include <fstream>
-#include <thread>
-#include <iomanip> // std::setw
-#include <mutex>
 #include <deque>
+#include <fstream>
+#include <iomanip> // std::setw
+#include <iostream>
+#include <mutex>
+#include <sstream>
+#include <sys/stat.h>
+#include <thread>
 
 namespace sea5kg {
 
 long _current_time_in_milliseconds() {
-  long nTimeStart = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+  long nTimeStart =
+      std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch())
+          .count();
   return nTimeStart;
 }
 
 long _current_time_in_seconds() {
-  long nTimeStart = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+  long nTimeStart =
+      std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
   return nTimeStart;
 }
 
 std::string _current_time_for_log_format() {
-  long nTimeStart = std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+  long nTimeStart =
+      std::chrono::duration_cast<std::chrono::milliseconds>(std::chrono::system_clock::now().time_since_epoch())
+          .count();
   std::string sMilliseconds = std::to_string(int(nTimeStart % 1000));
   nTimeStart = nTimeStart / 1000;
 
@@ -71,13 +76,14 @@ std::string _current_time_for_log_format() {
   // for more information about date/time format
   char buf[80];
   strftime(buf, sizeof(buf), "%Y-%m-%d %H:%M:%S", &tstruct);
-  return std::string(buf) + "." + std::string( 3 - sMilliseconds.length(), '0').append(sMilliseconds);
+  return std::string(buf) + "." + std::string(3 - sMilliseconds.length(), '0').append(sMilliseconds);
 }
 
 std::string _get_thread_id() {
-  static_assert(sizeof(std::thread::id)==sizeof(uint64_t),"this function only works if size of thead::id is equal to the size of uint_64");
+  static_assert(sizeof(std::thread::id) == sizeof(uint64_t),
+                "this function only works if size of thead::id is equal to the size of uint_64");
   std::thread::id this_id = std::this_thread::get_id();
-  uint64_t val = *((uint64_t*) &this_id);
+  uint64_t val = *((uint64_t *)&this_id);
   std::stringstream stream;
   stream << "0x" << std::setw(16) << std::setfill('0') << std::hex << val;
   return std::string(stream.str());
@@ -114,11 +120,13 @@ enum class color_code {
 
 class color_modifier {
 public:
-  color_modifier(color_code _code) : code(_code) {}
-  friend std::ostream &operator<<(std::ostream& os, const color_modifier &mod) {
+  color_modifier(color_code _code) : code(_code) {
+  }
+  friend std::ostream &operator<<(std::ostream &os, const color_modifier &mod) {
     os << "\033[" << int(mod.code) << "m";
     return os;
   }
+
 private:
   color_code code;
 };
@@ -131,12 +139,18 @@ static sea5kg::color_modifier COLOR_GREEN(sea5kg::color_code::FG_GREEN);
 
 const sea5kg::color_modifier &log_level_to_color_modifier(log_level lvl) {
   switch (lvl) {
-    case log_level::DEBUG: return COLOR_GRAY;
-    case log_level::INFO: return COLOR_DEFAULT;
-    case log_level::SUCCESS: return COLOR_GREEN;
-    case log_level::WARNING: return COLOR_YELLOW;
-    case log_level::ERROR: return COLOR_RED;
-    case log_level::CRITICAL: return COLOR_RED;
+  case log_level::DEBUG:
+    return COLOR_GRAY;
+  case log_level::INFO:
+    return COLOR_DEFAULT;
+  case log_level::SUCCESS:
+    return COLOR_GREEN;
+  case log_level::WARNING:
+    return COLOR_YELLOW;
+  case log_level::ERROR:
+    return COLOR_RED;
+  case log_level::CRITICAL:
+    return COLOR_RED;
   }
   return COLOR_DEFAULT;
 }
@@ -316,17 +330,16 @@ void private_logger_impl::do_log_rotate_update_filename(log_level lvl) {
   if (lvl == log_level::DISABLE) {
     return;
   }
-  int t_now_seconds = std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
+  int t_now_seconds =
+      std::chrono::duration_cast<std::chrono::seconds>(std::chrono::system_clock::now().time_since_epoch()).count();
   long rotate_diff = t_now_seconds - m_log_start_time;
   if (m_log_start_time == 0 || rotate_diff > m_rotation_period_in_seconds) {
     m_log_start_time = t_now_seconds;
     std::string log_dir_formatted = prepare_log_dir(m_log_dir, t_now_seconds, lvl);
-    m_log_file_fullpath = log_dir_formatted + "/"
-      + m_log_file_name_prefix
-      + _format_time_for_filename(m_log_start_time) + ".log";
+    m_log_file_fullpath =
+        log_dir_formatted + "/" + m_log_file_name_prefix + _format_time_for_filename(m_log_start_time) + ".log";
   }
 }
-
 
 bool _dir_exists(const std::string &sDirname) {
   struct stat st;
@@ -403,19 +416,26 @@ static const std::string type_critical = " [CRITICAL] ";
 
 const std::string &log_level_to_type(log_level lvl) {
   switch (lvl) {
-    case log_level::DEBUG: return type_debug;
-    case log_level::INFO: return type_info;
-    case log_level::SUCCESS: return type_success;
-    case log_level::WARNING: return type_warning;
-    case log_level::ERROR: return type_error;
-    case log_level::CRITICAL: return type_critical;
+  case log_level::DEBUG:
+    return type_debug;
+  case log_level::INFO:
+    return type_info;
+  case log_level::SUCCESS:
+    return type_success;
+  case log_level::WARNING:
+    return type_warning;
+  case log_level::ERROR:
+    return type_error;
+  case log_level::CRITICAL:
+    return type_critical;
   }
   return type_none;
 }
 
 void init_log_message(std::string &log_message, log_level lvl, const std::string &tag, const std::string &message) {
   if (log_message.empty()) {
-    log_message = _current_time_for_log_format() + ", " + _get_thread_id() + log_level_to_type(lvl) + tag + ": " + message;
+    log_message =
+        _current_time_for_log_format() + ", " + _get_thread_id() + log_level_to_type(lvl) + tag + ": " + message;
   }
 }
 
@@ -428,7 +448,7 @@ void private_logger_impl::add(log_level lvl, const std::string &tag, const std::
     init_log_message(log_message, lvl, tag, message);
     std::cout << log_level_to_color_modifier(lvl) << log_message << COLOR_DEFAULT << std::endl;
   }
-  
+
   if (lvl >= m_log_level_file_output) {
     std::ofstream log_file(m_log_file_fullpath, std::ios::app);
     if (!log_file) {
@@ -507,7 +527,6 @@ std::vector<std::string> log::runtime_history_messages() {
   return log::g_GLOBAL->runtime_history_messages();
 }
 
-
 void log::debug(const std::string &tag, const std::string &message) {
   log::g_GLOBAL->debug(tag, message);
 }
@@ -520,7 +539,7 @@ void log::success(const std::string &tag, const std::string &message) {
   log::g_GLOBAL->success(tag, message);
 }
 
-void log::warning(const std::string & tag, const std::string &message) {
+void log::warning(const std::string &tag, const std::string &message) {
   log::g_GLOBAL->warning(tag, message);
 }
 

@@ -20,7 +20,7 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
-*/
+ */
 
 // original source-code: https://github.com/sea5kg/sea5kg-logger
 
@@ -100,6 +100,5 @@ public:
 };
 
 } // namespace sea5kg
-
 
 #endif // SEA5KG_LOGGER_H
