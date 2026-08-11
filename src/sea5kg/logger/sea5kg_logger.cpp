@@ -201,6 +201,7 @@ private_logger_impl::private_logger_impl() {
 void private_logger_impl::set_log_dirpath(const std::string &log_dir) {
   std::lock_guard<std::mutex> lock(m_mutex);
   m_log_dir = log_dir;
+  m_log_start_time = 0; // reset log rotate
   do_log_rotate_update_filename(m_log_level_file_output);
 }
 
@@ -212,6 +213,7 @@ const std::string &private_logger_impl::log_dirpath() {
 void private_logger_impl::set_log_filename_prefix(const std::string &prefix) {
   std::lock_guard<std::mutex> lock(m_mutex);
   m_log_file_name_prefix = prefix;
+  m_log_start_time = 0; // reset log rotate
   do_log_rotate_update_filename(m_log_level_file_output);
 }
 
@@ -233,6 +235,7 @@ int private_logger_impl::rotation_period_in_seconds() {
 void private_logger_impl::set_log_level_file_output(log_level val) {
   std::lock_guard<std::mutex> lock(m_mutex);
   m_log_level_file_output = val;
+  m_log_start_time = 0; // reset log rotate
   do_log_rotate_update_filename(m_log_level_file_output);
 }
 
