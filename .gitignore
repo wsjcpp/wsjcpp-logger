@@ -2,6 +2,7 @@ tmp/*
 /sea5kg-logger
 .wsjcpp/*
 .vscode/*
+!.vscode/settings.json
 *.log
 
 # Prerequisites
